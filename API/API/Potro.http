@@ -1,5 +1,43 @@
+### Requisação para a raiz da aplicação
 GET http://localhost:5026
+
+### Listar produtos
+GET http://localhost:5026/api/produto/listar
+
+### Cadastrar produto
+POST http://localhost:5026/api/produto/cadastrar
+Content-Type: application/json
+
+{
+    "nome" : "lista",
+    "valor" : 5.8,
+    "quantidade" : 153
+}
+
+### Deletar produto pelo Id no corpo
+DELETE http://localhost:5026/api/produto/deletar
+Content-Type: application/json
+
+{
+    "id": "76f6ed01-e52a-44b7-a4d1-6bab688d5453"
+}
+
 ###
 
-GET http://localhost:5026/FINAL
+PUT http://localhost:5026/api/produto/alterar
+Content-Type: application/json
+
+{
+  "id": "0252821f-46ff-4220-afed-b413e7670b16",
+  "nome": "papa",
+  "valor": 6.8,
+  "quantidade": 151
+}
+
+###
+
+POST http://localhost:5026/api/produto/buscar
+Content-Type: application/json
+
+"papa"
 
