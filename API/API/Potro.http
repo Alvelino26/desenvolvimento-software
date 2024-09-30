@@ -19,7 +19,7 @@ DELETE http://localhost:5026/api/produto/deletar
 Content-Type: application/json
 
 {
-    "id": "76f6ed01-e52a-44b7-a4d1-6bab688d5453"
+    "id": "62f352a7-ab58-430d-bee2-f20faa01a244"
 }
 
 ###

@@ -11,6 +11,7 @@ public class Produto
     //C# - Atributos/Propriedades - Características
     public string? Id { get; set; }
     public string? Nome { get; set; }
+    public string? descricao { get; set; }
     public double Valor { get; set; }
     public int Quantidade { get; set; }
     public DateTime CriadoEm { get; set; }
