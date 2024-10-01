@@ -7,6 +7,8 @@ using API.Models;
 using Microsoft.AspNetCore.Mvc;
 
 var builder = WebApplication.CreateBuilder(args);
+builder.Services.AddDbContext<AppDataContext>();
+//adicionando o serviço debanco de dados na aplicação
 var app = builder.Build();
 
 List<Produto> produtos = new List<Produto>
@@ -30,11 +32,11 @@ List<Produto> produtos = new List<Produto>
 app.MapGet("/", () => "API de Produtos");
 
 //GET: /api/produto/listar
-app.MapGet("/api/produto/listar", () =>
+app.MapGet("/api/produto/listar", ([FromServices] AppDataContext ctx) =>
 {
-    if(produtos.Count > 0)
+    if(ctx.Produtos.Any())
     {
-    return Results.Ok(produtos);
+    return Results.Ok(ctx.Produtos.ToList());
     }
     return Results.NotFound();
 
@@ -82,9 +84,11 @@ app.MapPut("/api/produto/alterar", ([FromBody] Produto dadosAtualizacao) =>
 });
 
 //POST: /api/produto/cadastrar/param_nome
-app.MapPost("/api/produto/cadastrar", ([FromBody] Produto produto) =>
+app.MapPost("/api/produto/cadastrar", ([FromBody] Produto produto,
+  [FromServices] AppDataContext ctx) =>
 {
-    produtos.Add(produto);
+    ctx.Produtos.Add(produto);
+    ctx.SaveChanges();
     return Results.Created("", produto);
 });
 
@@ -103,7 +107,5 @@ app.MapPost("/api/produto/buscar", ([FromBody] string nome) =>
 
 app.Run();
 
-//Exercícios para aula de hoje
-// - Buscar um produto pelo nome
 
 
